@@ -23,10 +23,10 @@ const parameters = {
   count: 100000,
   size: 0.01,
   radius: 5,
-  branches: 6,
+  branches: 3,
   spin: 1,
   randomness: 0.2,
-  randomnessPower: 2,
+  reduceRandomness: 3,
   insideColor: "#ff6030",
   outsideColor: "#1b3984",
 };
@@ -61,17 +61,17 @@ const generateGalaxxy = () => {
     const spinAngle = radius * parameters.spin;
 
     const randomX =
-      Math.pow(Math.random(), parameters.randomnessPower) *
+      Math.pow(Math.random(), parameters.reduceRandomness) *
       (Math.random() < 0.5 ? 1 : -1) *
       parameters.randomness *
       radius;
     const randomY =
-      Math.pow(Math.random(), parameters.randomnessPower) *
+      Math.pow(Math.random(), parameters.reduceRandomness) *
       (Math.random() < 0.5 ? 1 : -1) *
       parameters.randomness *
       radius;
     const randomZ =
-      Math.pow(Math.random(), parameters.randomnessPower) *
+      Math.pow(Math.random(), parameters.reduceRandomness) *
       (Math.random() < 0.5 ? 1 : -1) *
       parameters.randomness *
       radius;
@@ -145,7 +145,7 @@ gui
   .step(0.01)
   .onFinishChange(generateGalaxxy);
 gui
-  .add(parameters, "randomnessPower")
+  .add(parameters, "reduceRandomness")
   .min(1)
   .max(10)
   .step(0.01)
