@@ -22,11 +22,11 @@ const scene = new THREE.Scene();
  * Water
  */
 // Geometry
-const waterGeometry = new THREE.PlaneGeometry(10, 10, 1024, 1024);
+const waterGeometry = new THREE.SphereGeometry(5, 1024, 1024); // Use SphereGeometry
 
 // Color
-debugObject.depthColor = "#1085a2";
-debugObject.surfaceColor = "#ffe894";
+debugObject.depthColor = "#99eeff";
+debugObject.surfaceColor = "#fbff00";
 
 // Material
 const waterMaterial = new THREE.ShaderMaterial({
@@ -35,19 +35,19 @@ const waterMaterial = new THREE.ShaderMaterial({
   uniforms: {
     uTime: { value: 0 },
 
-    uBigWavesElevation: { value: 0.074 },
-    uBigWavesFrequency: { value: new THREE.Vector2(1.748, 0.666) },
-    uBigWavesSpeed: { value: 1.782 },
+    uBigWavesElevation: { value: 0.136 },
+    uBigWavesFrequency: { value: new THREE.Vector2(1.516, 0.82) },
+    uBigWavesSpeed: { value: 0.885 },
 
-    uSmallWavesElevation: { value: 0.128},
-    uSmallWavesFrequency: { value: 1.997 },
-    uSmallWavesSpeed: { value: 0.668 },
-    uSmallWavesIterations: { value: 3 },
+    uSmallWavesElevation: { value: 2 },
+    uSmallWavesFrequency: { value: 1.301 },
+    uSmallWavesSpeed: { value: 0.39 },
+    uSmallWavesIterations: { value: 1 },
 
     uDepthColor: { value: new THREE.Color(debugObject.depthColor) },
     uSurfaceColor: { value: new THREE.Color(debugObject.surfaceColor) },
-    uColorOffset: { value: 0.082 },
-    uColorMultiplier: { value: 2.986 },
+    uColorOffset: { value: 0.237 },
+    uColorMultiplier: { value: 2.676 },
   },
 });
 
@@ -78,7 +78,7 @@ gui
 gui
   .add(waterMaterial.uniforms.uSmallWavesElevation, "value")
   .min(0)
-  .max(1)
+  .max(2)
   .step(0.001)
   .name("Small Waves Elevation");
 gui
@@ -127,7 +127,6 @@ gui
 
 // Mesh
 const water = new THREE.Mesh(waterGeometry, waterMaterial);
-water.rotation.x = -Math.PI * 0.5;
 scene.add(water);
 
 /**
@@ -157,12 +156,12 @@ window.addEventListener("resize", () => {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-  75,
+  20,
   sizes.width / sizes.height,
   0.1,
   100
 );
-camera.position.set(1, 1, 1);
+camera.position.set(5, 35, 5);
 scene.add(camera);
 
 // Controls
