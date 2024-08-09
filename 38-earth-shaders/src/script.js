@@ -106,7 +106,7 @@ const updateSun = () => {
 
   // Uniforms
   earthMaterial.uniforms.uSunDirection.value.copy(sunDirection);
-    atmosphereMaterial.uniforms.uSunDirection.value.copy(sunDirection);
+  atmosphereMaterial.uniforms.uSunDirection.value.copy(sunDirection);
 };
 updateSun();
 
@@ -148,6 +148,20 @@ gui
       earthParameters.atmosphereTwilightColor
     );
   });
+
+let playing = true;
+
+//Add check to gui to toggle play
+gui
+  .add(
+    {
+      play: () => {
+        playing = !playing;
+      },
+    },
+    "play"
+  )
+  .name("Play");
 
 /**
  * Sizes
@@ -211,7 +225,9 @@ const clock = new THREE.Clock();
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
-  earth.rotation.y = elapsedTime * 0.25;
+  if (playing) {
+    earth.rotation.y = elapsedTime * 0.25;
+  }
 
   // Update controls
   controls.update();
