@@ -151,17 +151,10 @@ gui
 
 let playing = true;
 
-//Add check to gui to toggle play
-gui
-  .add(
-    {
-      play: () => {
-        playing = !playing;
-      },
-    },
-    "play"
-  )
-  .name("Play");
+//Add toggle to gui to toggle play
+gui.add({ play: true }, "play").onChange((value) => {
+  playing = value;
+});
 
 /**
  * Sizes
